@@ -6,19 +6,9 @@
     <title>628班成绩计算页面（Beta1.0）</title>
     <meta name="description" content="使用sheetjs读取和导出excel示例">
     <style type="text/css">
-        table {
-            border-collapse: collapse;
-        }
-
         h2,
         h3 {
             text-align: center;
-        }
-
-        th,
-        td {
-            border: solid 1px #6D6D6D;
-            padding: 5px 10px;
         }
 
         .mt-sm {
@@ -37,7 +27,7 @@
             margin: 0 auto;
             background: #fff;
             padding: 20px;
-            min-height: 100vh;
+            text-align: center;
         }
 
         .result {
@@ -45,6 +35,12 @@
             white-space: pre;
             font-size: 20px;
             line-height: 40px;
+
+        }
+
+        img {
+            width: 15%;
+            height: 15%;
         }
     </style>
 </head>
@@ -55,16 +51,19 @@
         <div class="mt-sm">
             <input type="file" id="file" style="display:none;"
                 accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
-            <a href="javascript:selectFile()">加载本地excel文件</a>
+            <a href="javascript:selectFile()" id="onclick">加载本地excel文件</a>
             <p>注意：excel文件必须使用里的<a href="https://github.com/su-xiaoyu/628-Score-calculation-tool">excel文件</a></p>
-            <p>示例文件<a
+            <p>示例文件
+                <a
                     href="https://raw.githubusercontent.com/su-xiaoyu/628-Score-calculation-tool/main/%E7%A4%BA%E4%BE%8Bexcel.xlsx">下载</a>
             </p>
         </div>
-        <h3 id="onclick">结果输出:</h3>
+        <img src="/img/anypay.jpg">
+        <h3>结果输出:</h3>
         <div class="result">
             <ol id="result_1"></ol>
             <div id="result_2"></div>
+
         </div>
         <!-- <h2>导出excel</h2>
         <div class="mt-sm" style="padding-bottom:40px;">
@@ -107,9 +106,15 @@
             var worksheet = workbook.Sheets[sheetNames[0]]; // 这里我们只读取第一张sheet
             //var csv = XLSX.utils.sheet_to_csv(worksheet);
             //document.getElementById('result').innerHTML = csv2table(csv);
-            var myjson1 = XLSX.utils.sheet_to_json(worksheet),
-                myjson2 = XLSX.utils.sheet_to_json(worksheet)
+            var myjson_1 = XLSX.utils.sheet_to_json(worksheet),
+                myjson_2 = XLSX.utils.sheet_to_json(worksheet)
 
+            for (let i = 0; i < myjson_1.length; i++) {
+                myjson_1[i].change = myjson_1[i].last - myjson_1[i].current
+                myjson_2[i].change = myjson_2[i].last - myjson_2[i].current
+                //console.log(myjson[i])
+            }
+            //console.log(myjson[5].change)
 
             /*获取指定单元格*/
             var cell_1 = 'A1',
@@ -125,9 +130,9 @@
                 value_2 = (desired_cell_2 ? desired_cell_2.v : undefined),
                 value_3 = (desired_cell_3 ? desired_cell_3.v : undefined)
             //var name = value_1
-            //console.log(typeof (name)) //姓名
-            //console.log(value_2) //这一次
-            //console.log(value_3) //上一次
+            //console.log(typeof (name)) //姓名name
+            //console.log(value_2) //这一次current
+            //console.log(value_3) //上一次last
 
 
             /* var obj = Object.assign(myjson1)
@@ -151,14 +156,13 @@
 
                 }
             } //升序
-            var obj1 = myjson1.sort(compare1("变化")),
-                obj2 = myjson2.sort(compare2(value_2))
+            var obj1 = myjson_1.sort(compare1("change")),
+                obj2 = myjson_2.sort(compare2("current"))
+            console.log(obj1)
+            console.log(obj2)
 
-
-            //console.log(myjson2.sort(compare2("月考九级序")))
-            console.log(myjson1.sort(compare1("变化")))
             var array = new Array()
-            for (let i = 0, j = 0; i < myjson1.length; i++) {
+            for (let i = 0, j = 0; i < myjson_1.length; i++) {
                 //console.log(obj2[i])
                 array[j] = obj2[i]
                 j += 1
@@ -172,7 +176,7 @@
             function remove(arr) {
                 for (var i = 0; i < arr.length; i++) {
                     for (var j = i + 1; j < arr.length; j++) {
-                        if (arr[i].姓名 == arr[j].姓名) { //第一个等同于第二个，splice方法删除第二个
+                        if (arr[i].name == arr[j].name) { //第一个等同于第二个，splice方法删除第二个
                             arr.splice(j, 1);
                             j--;
                         }
@@ -181,6 +185,7 @@
                 return arr;
             } //查重
             var result_arr = remove(array)
+            console.log(result_arr)
 
             var group_1 = new Array(),
                 group_2 = new Array(),
@@ -198,10 +203,10 @@
                 }
 
             }
-            var group_1 = group_1.sort(compare1("变化")),
-                group_2 = group_2.sort(compare1("变化")),
-                group_3 = group_3.sort(compare1("变化")),
-                group_4 = group_4.sort(compare1("变化"))
+            var group_1 = group_1.sort(compare1("change")),
+                group_2 = group_2.sort(compare1("change")),
+                group_3 = group_3.sort(compare1("change")),
+                group_4 = group_4.sort(compare1("change"))
 
 
             var group = [group_1[11],
@@ -215,7 +220,7 @@
             ]
             var result_2 = document.getElementById('result_2')
             for (let i = 0; i < group.length; i++) {
-                var txt = document.createTextNode(group[i].姓名 + "    变化：" + group[i].变化)
+                var txt = document.createTextNode(group[i].name + "    变化：" + group[i].change)
                 var p = document.createElement('p')
                 p.appendChild(txt)
                 result_2.appendChild(p)
@@ -223,7 +228,7 @@
 
             var result_1 = document.getElementById('result_1')
             for (let i = 0; i < result_arr.length; i++) {
-                var txt = document.createTextNode(result_arr[i].姓名 + "    变化：" + result_arr[i].变化)
+                var txt = document.createTextNode(result_arr[i].name + "    变化：" + result_arr[i].change)
                 var li = document.createElement('li')
                 li.appendChild(txt)
                 result_1.appendChild(li)
