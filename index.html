@@ -61,7 +61,7 @@
         <img src="/img/anypay.jpg">
         <h3>结果输出:</h3>
         <div class="result">
-            <ol id="result_1"></ol>
+            <p id="result_1"></p>
             <div id="result_2"></div>
 
         </div>
@@ -228,10 +228,11 @@
 
             var result_1 = document.getElementById('result_1')
             for (let i = 0; i < result_arr.length; i++) {
-                var txt = document.createTextNode(result_arr[i].name + "    变化：" + result_arr[i].change)
-                var li = document.createElement('li')
-                li.appendChild(txt)
-                result_1.appendChild(li)
+                var txt = document.createTextNode((i + 1) + ". " + result_arr[i].name + "    变化：" + result_arr[i]
+                    .change)
+                var p = document.createElement('p')
+                p.appendChild(txt)
+                result_1.appendChild(p)
             }
         }
 
