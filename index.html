@@ -22,6 +22,8 @@
             margin: 0;
         }
 
+
+
         .container {
             width: 1024px;
             margin: 0 auto;
@@ -42,10 +44,17 @@
             width: 15%;
             height: 15%;
         }
+
+        .footer a {
+            text-decoration: none;
+            color: black;
+            font-size: 20px;
+        }
     </style>
 </head>
 
 <body>
+
     <div class="container">
         <h2>628班成绩计算工具（Beta2.0）</h2>
         <div class="mt-sm">
@@ -63,12 +72,12 @@
         <div class="result">
             <p id="result_1"></p>
             <div id="result_2"></div>
-
         </div>
         <!-- <h2>导出excel</h2>
         <div class="mt-sm" style="padding-bottom:40px;">
             <input type="button" onclick="exportExcel()" value="保存" /> 上面读取的表格您可以直接编辑，编辑后点击保存即可导出excel文件。
         </div> -->
+        <h1 class="footer"><a href="https://github.com/su-xiaoyu/su-xiaoyu.github.io">👉关于作者👈</a></h1>
     </div>
     <script type="text/javascript" src="./js/jquery.min.js"></script>
     <script type="text/javascript" src="./js/xlsx.core.min.js"></script>
