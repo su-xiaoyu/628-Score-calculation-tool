@@ -118,7 +118,8 @@
             //var csv = XLSX.utils.sheet_to_csv(worksheet);
             //document.getElementById('result').innerHTML = csv2table(csv);
             var myjson_1 = XLSX.utils.sheet_to_json(worksheet),
-                myjson_2 = XLSX.utils.sheet_to_json(worksheet)
+                myjson_2 = XLSX.utils.sheet_to_json(worksheet),
+                myjson_3 = XLSX.utils.sheet_to_json(worksheet)
 
             for (let i = 0; i < myjson_1.length; i++) {
                 myjson_1[i].change = myjson_1[i].last - myjson_1[i].current
@@ -168,7 +169,8 @@
                 }
             } //升序
             var obj1 = myjson_1.sort(compare1("change")),
-                obj2 = myjson_2.sort(compare2("current"))
+                obj2 = myjson_2.sort(compare2("current")),
+                obj3 = myjson_3.sort(compare2("last"))
             console.log(obj1)
             console.log(obj2)
 
@@ -204,13 +206,13 @@
                 group_4 = new Array()
             for (let i = 0; i < result_arr.length; i++) {
                 if (i <= 12) {
-                    group_1[i] = obj1[i]
+                    group_1[i] = obj3[i]
                 } else if (i > 12 && i <= 25) {
-                    group_2[i - 13] = obj1[i]
+                    group_2[i - 13] = obj3[i]
                 } else if (i > 25 && i <= 38) {
-                    group_3[i - 26] = obj1[i]
+                    group_3[i - 26] = obj3[i]
                 } else {
-                    group_4[i - 39] = obj1[i]
+                    group_4[i - 39] = obj3[i]
                 }
 
             }
