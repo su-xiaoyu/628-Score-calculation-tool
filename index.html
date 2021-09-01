@@ -204,34 +204,53 @@
             var group_1 = new Array(),
                 group_2 = new Array(),
                 group_3 = new Array(),
-                group_4 = new Array()
+                group_4 = new Array(),
+                group_5 = new Array(),
+                group_6 = new Array()
+
             for (let i = 0; i < result_arr.length; i++) {
-                if (i <= 12) {
+                if (i <= 9) {
                     group_1[i] = obj3[i]
-                } else if (i > 12 && i <= 25) {
-                    group_2[i - 13] = obj3[i]
-                } else if (i > 25 && i <= 38) {
-                    group_3[i - 26] = obj3[i]
-                } else {
-                    group_4[i - 39] = obj3[i]
+                } else if (i > 9 && i <= 19) {
+                    group_2[i - 10] = obj3[i]
+                } else if (i > 19 && i <= 29) {
+                    group_3[i - 20] = obj3[i]
+                } else if (i > 29 && i <= 39){
+                    group_4[i - 30] = obj3[i]
+                } else if (i > 39 && i <= 49){
+                    group_5[i - 40] = obj3[i]
+                } else{
+                    group_6[i - 50] = obj3[i]
                 }
 
             }
             var group_1 = group_1.sort(compare1("change")),
                 group_2 = group_2.sort(compare1("change")),
                 group_3 = group_3.sort(compare1("change")),
-                group_4 = group_4.sort(compare1("change"))
+                group_4 = group_4.sort(compare1("change")),
+                group_5 = group_5.sort(compare1("change")),
+                group_6 = group_6.sort(compare1("change"))
+
+            console.log(group_1)
+            console.log(group_2)
+            console.log(group_3)
+            console.log(group_4)
+            console.log(group_5)
+            console.log(group_6)
 
 
-            var group = [group_1[11],
-                group_1[12],
-                group_2[11],
-                group_2[12],
-                group_3[11],
-                group_3[12],
-                group_4[18],
-                group_4[19]
-            ]
+            var group = [group_1,group_2,group_3,group_4,group_5,group_6]
+            console.log(group)
+
+            for(let i=0;i<10;i++){
+                for(let j=0;j<group.length;j++){
+                    console.log(group[j][i].name)
+                }
+                
+
+            }
+
+
             var result_2 = document.getElementById('result_2')
             for (let i = 0; i < group.length; i++) {
                 var txt = document.createTextNode(group[i].name + "    变化：" + group[i].change)
