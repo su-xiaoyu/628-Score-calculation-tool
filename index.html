@@ -122,9 +122,9 @@
                 myjson_3 = XLSX.utils.sheet_to_json(worksheet)
 
             for (let i = 0; i < myjson_1.length; i++) {
-                myjson_1[i].change = myjson_1[i].last - myjson_1[i].current
-                myjson_2[i].change = myjson_2[i].last - myjson_2[i].current
-                myjson_3[i].change = myjson_3[i].last - myjson_3[i].current
+                myjson_1[i].change = -(myjson_1[i].last - myjson_1[i].current)
+                myjson_2[i].change = -(myjson_2[i].last - myjson_2[i].current)
+                myjson_3[i].change = -(myjson_3[i].last - myjson_3[i].current)
                 //console.log(myjson[i])
             }
             //console.log(myjson[5].change)
@@ -171,7 +171,7 @@
             } //升序
             var obj1 = myjson_1.sort(compare1("change")),
                 obj2 = myjson_2.sort(compare2("current")),
-                obj3 = myjson_3.sort(compare2("last"))
+                obj3 = myjson_3.sort(compare1("last"))
             console.log(obj1)
             console.log(obj2)
 
@@ -224,12 +224,12 @@
                 }
 
             }
-            var group_1 = group_1.sort(compare1("change")),
-                group_2 = group_2.sort(compare1("change")),
-                group_3 = group_3.sort(compare1("change")),
-                group_4 = group_4.sort(compare1("change")),
-                group_5 = group_5.sort(compare1("change")),
-                group_6 = group_6.sort(compare1("change"))
+            var group_1 = group_1.sort(compare2("change")),
+                group_2 = group_2.sort(compare2("change")),
+                group_3 = group_3.sort(compare2("change")),
+                group_4 = group_4.sort(compare2("change")),
+                group_5 = group_5.sort(compare2("change")),
+                group_6 = group_6.sort(compare2("change"))
 
             console.log(group_1)
             console.log(group_2)
