@@ -72,7 +72,8 @@
         <img src="/img/anypay.jpg">
         <h3>结果输出:</h3>
         <div class="result">
-            <p id="result_1"></p>
+            <div id="result_1"></div>
+
             <div id="result_2"></div>
         </div>
         <!-- <h2>导出excel</h2>
@@ -224,12 +225,12 @@
                 }
 
             }
-            var group_1 = group_1.sort(compare2("change")),
-                group_2 = group_2.sort(compare2("change")),
-                group_3 = group_3.sort(compare2("change")),
-                group_4 = group_4.sort(compare2("change")),
-                group_5 = group_5.sort(compare2("change")),
-                group_6 = group_6.sort(compare2("change"))
+            var group_1 = group_1.sort(compare1("change")),
+                group_2 = group_2.sort(compare1("change")),
+                group_3 = group_3.sort(compare1("change")),
+                group_4 = group_4.sort(compare1("change")),
+                group_5 = group_5.sort(compare1("change")),
+                group_6 = group_6.sort(compare1("change"))
 
             console.log(group_1)
             console.log(group_2)
@@ -237,36 +238,48 @@
             console.log(group_4)
             console.log(group_5)
             console.log(group_6)
-
+            group_6[9]={}//解决下面的二维数组[5][9]未定义
 
             var group = [group_1,group_2,group_3,group_4,group_5,group_6]
+
             console.log(group)
 
-            for(let i=0;i<10;i++){
-                for(let j=0;j<group.length;j++){
-                    console.log(group[j][i].name)
-                }
-                
-
-            }
 
 
             var result_2 = document.getElementById('result_2')
-            for (let i = 0; i < group.length; i++) {
-                var txt = document.createTextNode(group[i].name + "    变化：" + group[i].change)
-                var p = document.createElement('p')
-                p.appendChild(txt)
-                result_2.appendChild(p)
+            for (let j = 0;j<group[1].length;j++) {
+                for(let i = 0; i < group.length; i++){
+                    if (j==9&&i==5) {break;};
+                    //console.log(i+"+"+j)
+                    
+                    var txt = document.createTextNode(". " + group[i][j].name + "    变化：" + group[i][j].change)
+                    var p = document.createElement('p')
+                    p.appendChild(txt)
+                    result_2.appendChild(p)
+                }
             }
 
             var result_1 = document.getElementById('result_1')
-            for (let i = 0; i < result_arr.length; i++) {
-                var txt = document.createTextNode((i + 1) + ". " + result_arr[i].name + "    变化：" + result_arr[i]
-                    .change)
-                var p = document.createElement('p')
-                p.appendChild(txt)
-                result_1.appendChild(p)
+            for (let i = 0; i < group.length; i++) {
+                for(let j = 0;j<group[1].length;j++){
+                    if (j==9&&i==5) {break;};
+                    //console.log(i+";;"+j)
+                    
+                    //console.log(". " + group[i][j].name + "    变化：" + group[i][j].change)
+                    
+                    var txt1 = document.createTextNode(". " + group[i][j].name + "    变化：" + group[i][j].change)
+                    var p = document.createElement('p')
+                    p.appendChild(txt1)
+                    result_1.appendChild(p)
+                    if ((j+1)%10==0) {
+                        var txt = document.createTextNode("------------------")
+                        var p = document.createElement('p')
+                        p.appendChild(txt)
+                        result_1.appendChild(p)
+                    }                  
+                }
             }
+            
         }
 
         $(function () {
