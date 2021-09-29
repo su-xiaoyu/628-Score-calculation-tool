@@ -246,16 +246,18 @@
 
 
 
+            var n=1
             var result_2 = document.getElementById('result_2')
             for (let j = 0;j<group[1].length;j++) {
                 for(let i = 0; i < group.length; i++){
                     if (j==9&&i==5) {break;};
                     //console.log(i+"+"+j)
                     
-                    var txt = document.createTextNode(". " + group[i][j].name + "    变化：" + group[i][j].change)
+                    var txt = document.createTextNode(n+". " + group[i][j].name + "    变化：" + group[i][j].change)
                     var p = document.createElement('p')
                     p.appendChild(txt)
                     result_2.appendChild(p)
+                    n+=1
                 }
             }
 
