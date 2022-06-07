@@ -120,18 +120,18 @@ function readWorkbook(workbook) {
 		group_6 = new Array()
 
 	for (let i = 0; i < result_arr.length; i++) {
-		if (i <= 9) {
+		if (i <= 8) {
 			group_1[i] = obj3[i]
-		} else if (i > 9 && i <= 19) {
-			group_2[i - 10] = obj3[i]
-		} else if (i > 19 && i <= 29) {
-			group_3[i - 20] = obj3[i]
-		} else if (i > 29 && i <= 39) {
-			group_4[i - 30] = obj3[i]
-		} else if (i > 39 && i <= 49) {
-			group_5[i - 40] = obj3[i]
+		} else if (i > 8 && i <= 18) {
+			group_2[i - 9] = obj3[i]
+		} else if (i > 18 && i <= 28) {
+			group_3[i - 19] = obj3[i]
+		} else if (i > 28 && i <= 38) {
+			group_4[i - 29] = obj3[i]
+		} else if (i > 38 && i <= 48) {
+			group_5[i - 39] = obj3[i]
 		} else {
-			group_6[i - 50] = obj3[i]
+			group_6[i - 49] = obj3[i]
 		}
 	}
 	var group_1 = group_1.sort(compare1('change')),
