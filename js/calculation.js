@@ -147,19 +147,20 @@ function readWorkbook(workbook) {
 	console.log(group_4)
 	console.log(group_5)
 	console.log(group_6)
+	group_1[9] = {} //解决下面的二维数组[1][9]未定义
 	group_6[9] = {} //解决下面的二维数组[5][9]未定义
 
 	var group = [group_1, group_2, group_3, group_4, group_5, group_6]
 
 	console.log(group)
 	var n = 1
-	var result_2 = document.getElementById('result_2')
+	var result_2 = document.getElementById('result_2')//result2为全部
 	for (let j = 0; j < group[1].length; j++) {
 		for (let i = 0; i < group.length; i++) {
-			if (j == 9 && i == 5) {
-				break
+			if(group[i][j].name==undefined){
+				continue
 			}
-			//console.log(i+"+"+j)
+			console.log("i="+i+",,,,,,"+"j="+j)
 
 			var txt = document.createTextNode(
 				n + '. ' + group[i][j].name + '    变化：' + group[i][j].change
@@ -171,16 +172,19 @@ function readWorkbook(workbook) {
 		}
 	}
 
-	var result_1 = document.getElementById('result_1')
+	var result_1 = document.getElementById('result_1')//result1为分组
 	for (let i = 0; i < group.length; i++) {
 		var n = 1
-		for (let j = 0; j < group[1].length; j++) {
+		for (let j = 0; j < group[2].length; j++) {
 			if (j == 9 && i == 5) {
 				break
 			}
-			//console.log(i+";;"+j)
+			if (j == 9 && i == 0) {
+				break
+			}
+			console.log(i+";;"+j)
 
-			//console.log(". " + group[i][j].name + "    变化：" + group[i][j].change)
+			console.log(". " + group[i][j].name + "    变化：" + group[i][j].change)
 
 			var txt1 = document.createTextNode(
 				n + '. ' + group[i][j].name + '    变化：' + group[i][j].change
@@ -188,13 +192,19 @@ function readWorkbook(workbook) {
 			var p = document.createElement('p')
 			p.appendChild(txt1)
 			result_1.appendChild(p)
-			n += 1
-			if ((j + 1) % 10 == 0) {
+			if (n==9&&i==0) {
 				var txt = document.createTextNode('------------------')
 				var p = document.createElement('p')
 				p.appendChild(txt)
 				result_1.appendChild(p)
 			}
+			if (n%10==0) {
+				var txt = document.createTextNode('------------------')
+				var p = document.createElement('p')
+				p.appendChild(txt)
+				result_1.appendChild(p)
+			}
+			n += 1
 		}
 	}
 }
